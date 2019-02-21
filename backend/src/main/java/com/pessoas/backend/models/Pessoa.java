@@ -1,7 +1,15 @@
-package model;
+package com.pessoas.backend.models;
 
-public class Pessoa {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name="PESSOAS")
+public class Pessoa implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String nome;
     private String telefone;
     private String cpf;

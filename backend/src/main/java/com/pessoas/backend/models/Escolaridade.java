@@ -1,4 +1,4 @@
-package model;
+package com.pessoas.backend.models;
 
 public enum Escolaridade {
     FUNDAMENTAL_INCOMPLETO,
