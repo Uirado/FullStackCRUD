@@ -16,7 +16,7 @@ public class PessoaResource {
     PessoaRepository pessoaRepository;
 
     @GetMapping("/pessoas")
-    public List<Pessoa> getList (@RequestParam(value = "search") String search) {
+    public List<Pessoa> getList() {
         //TODO filter by name
         return pessoaRepository.findAll();
     }
@@ -27,17 +27,17 @@ public class PessoaResource {
     }
 
     @PostMapping("/pessoas")
-    public Pessoa addPessoa (@RequestBody Pessoa pessoa) {
+    public Pessoa addPessoa(@RequestBody Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
-    @DeleteMapping("/pessoas")
-    public void deletePessoa (@RequestBody Pessoa pessoa) {
-        pessoaRepository.delete(pessoa);
+    @DeleteMapping("/pessoas/{id}")
+    public void deletePessoa(@PathVariable(value = "id") long id) {
+        pessoaRepository.deleteById(id);
     }
 
     @PutMapping("/pessoas")
-    public Pessoa updatePessoa (@RequestBody Pessoa pessoa) {
+    public Pessoa updatePessoa(@RequestBody Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
