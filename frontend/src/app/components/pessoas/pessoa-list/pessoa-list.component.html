@@ -4,6 +4,7 @@
       <span>Pessoas</span>
     </mat-toolbar-row>
   </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
   <mat-nav-list>
     <a mat-list-item class="add-button" (click)="newPessoaDialog()">
       <mat-icon>person_add</mat-icon>
@@ -12,8 +13,6 @@
     <mat-divider></mat-divider>
   </mat-nav-list>
 </div>
-
-<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
 
 <mat-nav-list>
   <mat-list-item *ngFor="let pessoa of pessoas">
