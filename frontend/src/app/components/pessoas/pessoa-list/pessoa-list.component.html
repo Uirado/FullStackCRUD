@@ -12,17 +12,17 @@
     <mat-divider></mat-divider>
   </mat-nav-list>
 </div>
+
 <mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
 
 <mat-nav-list>
-  <a mat-list-item *ngFor="let pessoa of pessoas" [routerLink]="[ '/pessoas/' + pessoa?.id ]">
-    <span matLine>{{ pessoa?.nome }}</span>
-    <button mat-icon-button (click)="delete($event, pessoa)">
+  <mat-list-item *ngFor="let pessoa of pessoas">
+    <a matLine (click)="navigate([ '/pessoas/' + pessoa?.id ], pessoa)">{{ pessoa?.nome }}</a>
+    <button mat-icon-button (click)="delete(pessoa)">
       <mat-icon>delete</mat-icon>
     </button>
     <mat-divider></mat-divider>
-  </a>
-
+  </mat-list-item>
 </mat-nav-list>
 
 <span class="empty-list" *ngIf="!showProgressBar && pessoas.length === 0">Ninguém cadastrado</span>

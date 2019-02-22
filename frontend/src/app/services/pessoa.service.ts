@@ -43,8 +43,8 @@ export class PessoaService implements CRUD<Pessoa> {
     return this.http.post<Pessoa>(endpoint + '/pessoas', JSON.stringify(pessoa), httpOptions);
   }
 
-  update(object: Pessoa): Observable<Pessoa> {
-    throw new Error('Method not implemented.');
+  save(pessoa: Pessoa): Observable<Pessoa> {
+    return this.http.put<Pessoa>(endpoint + '/pessoas', JSON.stringify(pessoa), httpOptions);
   }
 
 }

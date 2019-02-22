@@ -1,3 +1,47 @@
-<p>
-  pessoa-view works!
-</p>
+<div class="header">
+  <mat-toolbar color="primary" class="mat-elevation-z4">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <span class="fill">{{ pessoa?.nome }}</span>
+      <button class="toolbar-button" mat-raised-button (click)="edit = true" *ngIf="!edit">
+        <mat-icon>edit</mat-icon>
+        <span matLine>Editar</span>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+
+<mat-card *ngIf="pessoa && !showProgressBar">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input matInput placeholder="Digite aqui" [(ngModel)]='pessoa.nome' [disabled]="!edit">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Telefone</mat-label>
+    <input matInput placeholder="+55 (00) 00000-0000" [(ngModel)]="pessoa.telefone" [disabled]="!edit">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>CPF</mat-label>
+    <input matInput placeholder="000.000.000-00" [(ngModel)]="pessoa.cpf" [disabled]="!edit">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Escolaridade</mat-label>
+    <mat-select [(ngModel)]="pessoa.escolaridade" [disabled]="!edit">
+      <mat-option *ngFor="let item of escolaridadeValues" [value]="item?.value">{{ item?.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button class="toolbar-button" color="primary" mat-raised-button (click)="save()" *ngIf="edit">
+    <mat-icon>check</mat-icon>
+    <span matLine>Salvar</span>
+    <mat-progress-bar mode="indeterminate" *ngIf="saving"></mat-progress-bar>
+  </button>
+</mat-card>

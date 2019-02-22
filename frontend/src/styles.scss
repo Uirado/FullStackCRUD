@@ -11,6 +11,10 @@ body {
   max-width: 280px;
 }
 
+.fill {
+  flex: 1;
+}
+
 .container {
   position: absolute;
   top: 0;

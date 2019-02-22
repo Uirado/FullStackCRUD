@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from 'src/app/services/pessoa.service';
 import { Pessoa, Escolaridade } from 'src/app/models/pessoa.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoa-list',
@@ -12,7 +13,9 @@ export class PessoaListComponent implements OnInit {
   private pessoas: Pessoa[];
   private showProgressBar: boolean;
 
-  constructor(private readonly pessoaService: PessoaService) { }
+  constructor(
+    private readonly pessoaService: PessoaService,
+    private readonly router: Router) { }
 
   ngOnInit() {
     this.showProgressBar = true;
@@ -26,10 +29,7 @@ export class PessoaListComponent implements OnInit {
     });
   }
 
-  delete(event: Event, pessoa: Pessoa): void {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-
+  delete(pessoa: Pessoa): void {
     this.pessoaService.delete(pessoa.id).subscribe(_ => {
       this.pessoas.splice(this.pessoas.indexOf(pessoa), 1);
       this.getList();
@@ -44,4 +44,7 @@ export class PessoaListComponent implements OnInit {
     });
   }
 
+  navigate(rota: any[]) {
+    this.router.navigate(rota);
+  }
 }

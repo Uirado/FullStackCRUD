@@ -1,0 +1,13 @@
+mat-card {
+  margin: 8px;
+  box-sizing: border-box;
+
+  > * {
+    width: 100%;
+    box-sizing: border-box
+  }
+}
+
+.toolbar-button mat-icon {
+  margin-right: 8px;
+}
