@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { PessoaService } from 'src/app/services/pessoa.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pessoa, Escolaridade, getEscolaridadeValues } from 'src/app/models/pessoa.model';
+import { CPF_MASK, TEL_MASK } from '../pessoa-new/pessoa-new.component';
 
 @Component({
   selector: 'app-pessoa-view',
@@ -16,9 +17,10 @@ export class PessoaViewComponent implements OnInit {
   id: number;
   pessoa: Pessoa;
   saving: boolean;
-
   escolaridadeValues;
 
+  public cpfMask = CPF_MASK;
+  public telMask = TEL_MASK;
 
   constructor(
     private readonly location: Location,
@@ -44,7 +46,6 @@ export class PessoaViewComponent implements OnInit {
   save() {
     this.saving = true;
     this.pessoaService.save(this.pessoa).subscribe(res => {
-      console.log(res);
       this.saving = false;
       this.edit = false;
     });

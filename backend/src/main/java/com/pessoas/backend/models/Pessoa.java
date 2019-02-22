@@ -17,7 +17,7 @@ public class Pessoa implements Serializable {
     @Column(length = 128, nullable = false)
     private String nome;
 
-    @Column(length = 14)
+    @Column(length = 11)
     private String telefone;
 
     private Escolaridade escolaridade;

@@ -10,6 +10,6 @@ export interface CRUD<T> {
 
   add(object: T): Observable<T>;
 
-  update(object: T): Observable<T>;
+  save(object: T): Observable<T>;
 
 }

@@ -22,29 +22,44 @@ export class PessoaService implements CRUD<Pessoa> {
 
   constructor(private http: HttpClient) { }
 
-  // private extractData(res: Response) {
-  //   const body = res;
-  //   return body || { };
-  // }
-
-  getAll(): Observable<Pessoa[]> {
+  public getAll(): Observable<Pessoa[]> {
     return this.http.get(endpoint + '/pessoas') as Observable<Pessoa[]>;
   }
 
-  get(id: number): Observable<Pessoa> {
+  public get(id: number): Observable<Pessoa> {
     return this.http.get(endpoint + '/pessoas/' + id) as Observable<Pessoa>;
   }
 
-  delete(id: number): Observable<Pessoa> {
+  public delete(id: number): Observable<Pessoa> {
     return this.http.delete<Pessoa>(endpoint + '/pessoas/' + id);
   }
 
-  add(pessoa: Pessoa): Observable<Pessoa> {
+  public add(pessoa: Pessoa): Observable<Pessoa> {
+    pessoa = this.normalize(pessoa);
     return this.http.post<Pessoa>(endpoint + '/pessoas', JSON.stringify(pessoa), httpOptions);
   }
 
-  save(pessoa: Pessoa): Observable<Pessoa> {
+  public save(pessoa: Pessoa): Observable<Pessoa> {
+    pessoa = this.normalize(pessoa);
     return this.http.put<Pessoa>(endpoint + '/pessoas', JSON.stringify(pessoa), httpOptions);
   }
 
+  private normalize(pessoa: Pessoa): Pessoa {
+    if (pessoa.hasOwnProperty('cpf')) {
+      pessoa.cpf = onlyNumbers(pessoa.cpf);
+    }
+    if (pessoa.hasOwnProperty('telefone')) {
+      pessoa.telefone = onlyNumbers(pessoa.telefone);
+    }
+    return pessoa;
+  }
+
+}
+
+export function onlyNumbers(string: string): string {
+  if (string !== null && string !== undefined) {
+    return string.replace(/\D+/g, '');
+  } else {
+    return string;
+  }
 }

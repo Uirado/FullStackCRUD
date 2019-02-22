@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Cadastrar pessoa</h2>
+<form [formGroup]="form" (submit)="onSubmit()" novalidate>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" required>
+      <mat-label>Nome</mat-label>
+      <input matInput
+      name="nome"
+      formControlName="nome"
+      placeholder="Digite aqui"
+      [(ngModel)]='nome'>
+      <mat-error *ngIf="formControls?.nome.invalid">Preencha o nome</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input matInput
+        name="telefone"
+        formControlName="telefone"
+        placeholder="(00) 00000-0000"
+        [(ngModel)]="telefone"
+        [textMask]="{mask: telMask}"
+        (change)="telefone = normalizeValue(telefone)">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CPF</mat-label>
+      <input matInput
+        name="cpf"
+        formControlName="cpf"
+        placeholder="000.000.000-00"
+        [(ngModel)]="cpf"
+        [textMask]="{mask: cpfMask}"
+        (change)="cpf = normalizeValue(cpf)">
+      <mat-error *ngIf="formControls?.cpf.invalid">Informe um CPF válido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Escolaridade</mat-label>
+      <mat-select
+        name="escolaridade"
+        formControlName="escolaridade"
+        [(ngModel)]="escolaridade">
+        <mat-option *ngFor="let item of escolaridadeValues"
+          [value]="item?.value">
+          {{ item?.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button type="submit">Cadastrar</button>
+    <mat-progress-bar mode="indeterminate" *ngIf="showProgressBar"></mat-progress-bar>
+  </mat-dialog-actions>
+</form>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -13,18 +14,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { PessoaViewComponent } from './pessoa-view/pessoa-view.component';
 import { PessoaListComponent } from './pessoa-list/pessoa-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PessoaNewComponent } from './pessoa-new/pessoa-new.component';
 
 @NgModule({
-  declarations: [PessoaViewComponent, PessoaListComponent],
+  declarations: [PessoaViewComponent, PessoaListComponent, PessoaNewComponent],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
+    TextMaskModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -36,6 +40,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatGridListModule,
     MatSelectModule,
-  ]
+    MatDialogModule,
+  ],
+  entryComponents: [PessoaNewComponent],
 })
 export class PessoasModule { }
