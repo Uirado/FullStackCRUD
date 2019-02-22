@@ -10,10 +10,19 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String nome;
-    private String telefone;
+
+    @Column(unique = true, nullable = false, length = 11)
     private String cpf;
+
+    @Column(length = 128, nullable = false)
+    private String nome;
+
+    @Column(length = 14)
+    private String telefone;
+
     private Escolaridade escolaridade;
+
+    public Pessoa() {}
 
     public Pessoa (String nome, String cpf) {
         this.nome = nome;
@@ -57,5 +66,13 @@ public class Pessoa implements Serializable {
 
     public void setEscolaridade(Escolaridade escolaridade) {
         this.escolaridade = escolaridade;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
